@@ -1,0 +1,45 @@
+/**
+* Home page CSS
+*/
+.jumbotron {
+    display: block;
+    background-color: #fff;
+    margin: auto 0;
+    clear: both;
+  }
+  
+  
+  
+  .search-bar .form-control {
+    width: 630px;
+    margin-bottom: 20px;
+    margin-left: -115px;
+    
+  }
+  
+  .container .logo img{
+    width: 300px;
+    margin-top:200px;
+    margin-bottom: 20px;
+  }
+  
+  .buttons {
+    margin-left: 0px;
+  }
+  
+  .list-inline {
+    padding-top: 20px;
+    
+  }
+  
+  .list-inline a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .navbar-bottom {
+    height: 50px;
+    
+    background-color: gray;
+  }
+  

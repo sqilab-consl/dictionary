@@ -1,0 +1,123 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Tables {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+	<div class="page-inner">
+		<div class="page-header">
+			<h4 class="page-title">Sytem</h4>
+			<ul class="breadcrumbs">
+				<li class="nav-home">
+					<a href="#">
+						<i class="flaticon-home"></i>
+					</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">Roles</a>
+				</li>
+				<li class="separator">
+					<i class="flaticon-right-arrow"></i>
+				</li>
+				<li class="nav-item">
+					<a href="#">View</a>
+				</li>
+			</ul>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Roles
+							<div class="pull-right">
+								<a href="/role/add" class="btn btn-primary">Add Role</a>
+							</div>
+						</div>
+					</div>
+					<div class="card-body">
+						<div class="card-sub">
+							This is a list of roles supported by the system
+						</div>
+
+						<table class="table mt-3">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Rele Name</th>
+                                    <th scope="col">Description</th>
+									<th scope="col">Status</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for role in roles %}
+								<tr>
+									<td>{{loop.index}}</td>
+									<td>{{role.name}}</td>
+									<td>{{role.description}}</td>
+									<td>{% if role.active %}<i class="info-success">Active</i>{%else%}<i class="info-danger">In Active</i>{%endif%}</td>
+									<td>
+                                        <a href="{# url_for('languages_blueprint.disable_role', user=roles.id)#}">
+											<i class="fa fa-eye"></i>
+											Disable
+										</a>
+										<a href="{# url_for('languages_blueprint.edit_role', user=roles.id)#}">
+												<i class="fa fa-eye"></i>
+												Edit
+											</a>
+									</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<!-- Atlantis DEMO methods, don't include it in your project! -->
+<script src="/static/assets/js/setting-demo2.js"></script>
+<script>
+	$('#displayNotif').on('click', function () {
+		var placementFrom = $('#notify_placement_from option:selected').val();
+		var placementAlign = $('#notify_placement_align option:selected').val();
+		var state = $('#notify_state option:selected').val();
+		var style = $('#notify_style option:selected').val();
+		var content = {};
+
+		content.message = 'Turning standard Bootstrap alerts into "notify" like notifications';
+		content.title = 'Bootstrap notify';
+		if (style == "withicon") {
+			content.icon = 'fa fa-bell';
+		} else {
+			content.icon = 'none';
+		}
+		content.url = 'index.html';
+		content.target = '_blank';
+
+		$.notify(content, {
+			type: state,
+			placement: {
+				from: placementFrom,
+				align: placementAlign
+			},
+			time: 1000,
+		});
+	});
+</script>
+
+{% endblock javascripts %}

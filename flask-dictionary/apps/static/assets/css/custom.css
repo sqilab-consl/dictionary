@@ -1,0 +1,55 @@
+.login-panel {
+    position: relative;
+    text-align: center;
+    width: 40%;
+    height: 100vh;
+    top: 10%;
+    min-height: 100%;
+    margin: 0px auto;
+    transition: all .3s; 
+}
+    .login-panel > .content {
+      padding: 0px !important;
+      min-height: calc(100% - 123px);
+      margin-top: 62px;
+      overflow: hidden; }
+    .login-panel > .content-full {
+      padding: 0px !important;
+      min-height: calc(100% - 123px);
+      margin-top: 63px;
+      overflow: hidden; }
+    .login-panel .page-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px; }
+      .login-panel .page-header .page-title {
+        margin-bottom: 0px; }
+      .login-panel .page-header .btn-page-header-dropdown {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+        padding: 0px;
+        color: #6b6b6b;
+        box-shadow: 0 2px 14px 0 rgba(144, 116, 212, 0.1) !important;
+        border: 0; }
+        .login-panel .page-header .btn-page-header-dropdown:after {
+          display: none; }
+      .login-panel .page-header .dropdown-menu {
+        margin-top: 15px;
+        top: 0px !important; }
+        .login-panel .page-header .dropdown-menu:after {
+          width: 0;
+          height: 0;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-bottom: 8px solid #ffffff;
+          position: absolute;
+          top: -8px;
+          right: 32px;
+          content: ''; }
+    .login-panel .page-divider {
+      height: 0;
+      margin: .3rem 0 1rem;
+      overflow: hidden;
+      border-top: 1px solid #ebecec; 
+    }

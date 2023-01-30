@@ -1,0 +1,121 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Tables {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Language</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Phrases</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Languages Phrases
+									<a class="edit-modal-opener" data-toggle="modal"
+									data-whatever="{{ url_for('languages_blueprint.add_phrase',language=language.id) }}"
+									href="#">Add Phrase</a>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="card-sub">									
+								This is a list of phrases in {{language.language_name}}
+							</div>
+							<table class="table mt-3">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Phrase</th>
+										<th scope="col">Category</th>
+										<th scope="col">Author</th>
+										<th scope="col">Year</th>
+										<th scope="col">Mood</th>
+										<th scope="col">Status</th>
+										<th scope="col"></th>
+									</tr>
+								</thead>
+								<tbody>
+										{% for phrase in phrases %}
+									<tr>
+										<td>{{loop.index}}</td>
+										<td>{{phrase.phrase}}</td>
+										<td>{{phrase.author}}</td>
+										<td>{{phrase.category}}</td>
+										<td>{{phrase.year}}</td>
+										<td>{{phrase.mood}}</td>
+										<td>{% if language.active %}Yes{%else%}No{%endif%}</td>
+										<td>
+											<a href="{{ url_for('languages_blueprint.view_phrase', language=language.id,phrase_id=phrase.id)}}">
+												<i class="fa fa-eye"></i>
+												View
+											</a>
+										</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo2.js"></script>
+	<script>
+		$('#displayNotif').on('click', function(){
+			var placementFrom = $('#notify_placement_from option:selected').val();
+			var placementAlign = $('#notify_placement_align option:selected').val();
+			var state = $('#notify_state option:selected').val();
+			var style = $('#notify_style option:selected').val();
+			var content = {};
+
+			content.message = 'Turning standard Bootstrap alerts into "notify" like notifications';
+			content.title = 'Bootstrap notify';
+			if (style == "withicon") {
+				content.icon = 'fa fa-bell';
+			} else {
+				content.icon = 'none';
+			}
+			content.url = 'index.html';
+			content.target = '_blank';
+
+			$.notify(content,{
+				type: state,
+				placement: {
+					from: placementFrom,
+					align: placementAlign
+				},
+				time: 1000,
+			});
+		});
+	</script>
+	
+{% endblock javascripts %}
