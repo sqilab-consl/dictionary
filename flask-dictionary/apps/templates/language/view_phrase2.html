@@ -1,0 +1,232 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Forms {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">View Word</h4>
+            <ul class="breadcrumbs">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="flaticon-home"></i>
+                    </a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">{{language.name}}</a>
+                </li>
+                <li class="separator">
+                    <i class="flaticon-right-arrow"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#">{{word.word}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Word Meanings</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12">
+                                <div data-toggle="fieldset" id="phone-fieldset">
+                                    <a class="edit-modal-opener" data-toggle="modal"
+                                        data-whatever="{{ url_for('languages_blueprint.add_word_meaning',language=language.id, word_id=word.id) }}"
+                                        href="#">Add Meening</a>
+                                </div>
+                                <table class="table mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th>Defination</th>
+                                            <th>Subscript</th>
+                                            <th>Pronounciation</th>
+                                            <th>Mood</th>
+                                            <th>PoS</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for meaning in word.meanings %}
+                                        <tr data-toggle="fieldset-entry">
+                                            <td>{{ meaning.defination }}</td>
+                                            <td>{{ meaning.subscript }}</td>
+                                            <td>{{ meaning.mood }}</td>
+                                            <td>{{ meaning.pronounciation }}</td>
+                                            <td>{{ meaning.part_of_speech }}</td>
+                                            <td>
+                                                <a
+                                                    href="{{ url_for('languages_blueprint.list_words', language=language.id)}}">
+                                                    View
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Word Translations</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12">
+                                <div data-toggle="fieldset" id="phone-fieldset">
+                                    <div data-toggle="fieldset" id="phone-fieldset">
+                                        <a class="edit-modal-opener" data-toggle="modal"
+                                            data-whatever="{{ url_for('languages_blueprint.add_word_translation',language=language.id, word_id=word.id) }}"
+                                            href="#">Add Translation</a>
+                                    </div>
+                                </div>
+                                <table class="table mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th>Language</th>
+                                            <th>Meaning</th>
+                                            <th>Quotation(s)</th>
+                                            <th>Example</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for fm in word.translations %}
+                                        <tr data-toggle="fieldset-entry">
+                                            <td>{{ fm.language }}</td>
+                                            <td>{{ fm.translation }}</td>
+                                            <td>{{ fm.quotation }}</td>
+                                            <td>{{ fm.label }}</td>
+                                            <td>
+                                                <a
+                                                    href="{{ url_for('languages_blueprint.list_words', language=language.id)}}">
+                                                    View
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Word Forms</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12">
+                                <div data-toggle="fieldset" id="phone-fieldset">
+                                        <div data-toggle="fieldset" id="phone-fieldset">
+                                                <a class="edit-modal-opener" data-toggle="modal"
+                                                    data-whatever="{{ url_for('languages_blueprint.add_word_form',language=language.id, word_id=word.id) }}"
+                                                    href="#">Add Word Form</a>
+                                            </div>
+                                </div>
+                                <table class="table mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th>Orthographic</th>
+                                            <th>Pronouciation</th>
+                                            <th>Hyphenation</th>
+                                            <th>Syllables</th>
+                                            <th>Stress</th>
+                                            <th>Label</th>
+                                            <th>Mood</th>
+                                            <th>PoS</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for fm in word.forms %}
+                                        <tr data-toggle="fieldset-entry">
+                                            <td>{{ fm.orthographic_form }}</td>
+                                            <td>{{ fm.pronunciation }}</td>
+                                            <td>{{ fm.hyphenation }}</td>
+                                            <td>{{ fm.syllabification }}</td>
+                                            <td>{{ fm.stress }}</td>
+                                            <td>{{ fm.word_label }}</td>
+                                            <td>{{ fm.mood }}</td>
+                                            <td>{{ fm.part_of_speech }}</td>
+                                            <td>
+                                                <a
+                                                    href="{{ url_for('languages_blueprint.list_words', language=language.id)}}">
+                                                    View
+                                                </a>
+                                            </td>
+
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock content %}
+
+    <!-- Specific Page JS goes HERE  -->
+    {% block javascripts %}
+
+    <!-- Atlantis DEMO methods, don't include it in your project! -->
+    <script src="/static/assets/js/setting-demo2.js"></script>
+
+    <script>
+        $(function () {
+            $("div[data-toggle=fieldset]").each(function () {
+                var $this = $(this);
+
+                //Add new entry
+                $this.find("button[data-toggle=fieldset-add-row]").click(function () {
+                    var target = $($(this).data("target"))
+                    console.log(target);
+                    var oldrow = target.find("div[data-toggle=fieldset-entry]:last");
+                    var row = oldrow.clone(true, true);
+                    console.log(row.find(":input")[0]);
+                    var elem_id = row.find(":input")[0].id;
+                    var elem_num = parseInt(elem_id.replace(/.*-(\d{1,4})-.*/m, '$1')) + 1;
+                    row.attr('data-id', elem_num);
+                    row.find(":input").each(function () {
+                        console.log(this);
+                        var id = $(this).attr('id').replace('-' + (elem_num - 1) + '-', '-' + (elem_num) + '-');
+                        $(this).attr('name', id).attr('id', id).val('').removeAttr("checked");
+                    });
+                    oldrow.after(row);
+                }); //End add new entry
+
+                //Remove row
+                $this.find("button[data-toggle=fieldset-remove-row]").click(function () {
+                    if ($this.find("div[data-toggle=fieldset-entry]").length > 1) {
+                        var thisRow = $(this).closest("div[data-toggle=fieldset-entry]");
+                        thisRow.remove();
+                    }
+                }); //End remove row
+            });
+        });
+    </script>
+
+    {% endblock javascripts %}
